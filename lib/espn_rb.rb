@@ -9,6 +9,8 @@ class EspnRb
   attr_reader :api_key
 
   def initialize(opts=nil)
-    @api_key = opts && oepts[:api_key].nil? ? opts[:api_key] : ENV['espn_api_key']
+    @api_key = opts && opts[:api_key].nil? ? opts[:api_key] : ENV['espn_api_key']
+
+    raise StandardError, "You must specify an API key." if @api_key.nil?
   end
 end
