@@ -18,7 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-Currently this doesn't do much. I am actively work on this. Check the commit log to see where I'm at, and check the issues to see how you can contribute.
+This is my most recent project and is very much in its infancy.
+
+#### Get all headlines
+
+```ruby
+  require 'espn_rb'
+  espn = Espn.rb
+
+  espn.all_headlines
+```
+
+I am actively work on this. Check the commit log to see where I'm at, and check the issues to see how you can contribute.
+
 
 ## Contributing
 
