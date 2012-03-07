@@ -1,0 +1,56 @@
+---
+:professional:
+  :coed:
+    :all:
+      :relative_url: /sports
+      :description: News across all sports/sections
+    :golf:
+      :relative_url: /sports/golf
+      :description: Golf
+    :boxing:
+      :relative_url: /sports/boxing
+      :description: Boxing
+    :mma:
+      :relative_url: /sports/mma
+      :description: Mixed Martial Arts
+    :racing:
+      :relative_url: /sports/racing
+      :description: Auto Racing
+    :soccer:
+      :relative_url: /sports/soccer
+      :description: Professional soccer (US focus)
+    :tennis:
+      :relative_url: /sports/tennis
+      :description: Tennis
+  :mens:
+    :baseball:
+      :relative_url: /sports/baseball/mlb
+      :description: Major League Baseball (MLB)
+    :basketball:
+      :relative_url: /sports/basketball/nba
+      :description: National Basketball Association (NBA)
+    :football:
+      :relative_url: /sports/football/nfl
+      :description: National Football League (NFL)
+    :hockey:
+      :relative_url: /sports/hockey/nhl
+      :description: National Hockey League (NHL)
+    :nascar:
+      :relative_url: /sports/racing/nascar
+      :description: NASCAR racing
+  :womens:
+    :basketball:
+      :realtive_url: /sports/basketball/wnba
+      :description: Women's National Basketball Association (WNBA)
+:collegiate:
+  :mens:
+    :basketball:
+      :relative_url: /sports/basketball/mens-college-basketball
+      :description: NCAA Men's College Basketball
+    :football:
+      :relative_url: /sports/football/college-football
+      :description: NCAA College Football
+  :womens:
+    :basketball:
+      :relative_url: /sports/basketball/womens-college-basketball
+      :description: NCAA Women's College Basketball
