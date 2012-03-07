@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe EspnRb do
-
   before(:each) do
     @espn = EspnRb.new
 
@@ -12,8 +11,8 @@ describe EspnRb do
                     :headers => {})
   end
 
-  it "should return valid Hash when #all_headlines is called." do
-    @espn.all_headlines.class.should eq(Hash)
+  it "should return valid EspnResponse when #all_headlines is called." do
+    @espn.all_headlines.class.should eq(EspnResponse)
   end
 
   specify { @espn.resources.class.should eq(Hash) }
@@ -22,4 +21,12 @@ describe EspnRb do
   it "get_results from api.espn.com" do
     @espn.get_results(@espn.resources[:professional][:coed][:all][:relative_url], @espn.methods[:news][:relative_url]).class.should eq(Net::HTTPOK)
   end
+
+  describe EspnResponse do
+    context "returns the correct title information when #title is called" do
+     it {@espn.all_headlines.titles.first.should eq("Trail Blazers 86, Hornets 74")}
+     it {@espn.all_headlines.titles.last.should eq("Saint Mary's (Cal) 78, No. 24 Gonzaga 74") }
+    end
+  end
 end
+

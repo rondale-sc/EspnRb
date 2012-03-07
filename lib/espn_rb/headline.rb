@@ -16,9 +16,7 @@ module Headline
   def all_headlines(opts=nil)
     response = get_results(resources[:professional][:coed][:all][:relative_url], methods[:news][:relative_url])
 
-    if response.class == Net::HTTPOK
-      JSON.parse(response.body)
-    end
+    EspnResponse.new JSON.parse(response.body)
   end
 
   def api_key
