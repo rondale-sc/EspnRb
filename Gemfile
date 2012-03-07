@@ -5,6 +5,14 @@ gemspec
 
 gem 'rspec', '~> 2.8.0'
 
+platform :jruby do
+  gem "json-jruby"
+end
+
+platform :ruby do
+  gem "json", "~> 1.6.5"
+end
+
 group :development do
   gem 'pry'
 end
