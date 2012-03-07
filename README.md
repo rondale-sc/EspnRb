@@ -1,6 +1,6 @@
 # EspnRb
 
-TODO: Write a gem description
+This is a ruby wrapper for the ESPN api.
 
 ## Installation
 
