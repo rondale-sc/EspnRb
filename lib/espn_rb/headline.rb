@@ -15,8 +15,12 @@ module Headline
 
   def all_headlines(opts=nil)
     response = get_results(resources[:professional][:coed][:all][:relative_url], methods[:news][:relative_url])
+    HeadlineResponse.new JSON.parse(response.body)
+  end
 
-    EspnResponse.new JSON.parse(response.body)
+  def basketball(mens=true)
+    response = get_results(resources[:professional][:mens][:basketball][:relative_url], methods[:news][:relative_url])
+    HeadlineResponse.new JSON.parse(response.body)
   end
 
   def api_key

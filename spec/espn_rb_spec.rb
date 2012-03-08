@@ -12,7 +12,7 @@ describe EspnRb do
   end
 
   it "should return valid EspnResponse when #all_headlines is called." do
-    @espn.all_headlines.class.should eq(EspnResponse)
+    @espn.all_headlines.class.should eq(HeadlineResponse)
   end
 
   specify { @espn.resources.class.should eq(Hash) }
@@ -22,7 +22,7 @@ describe EspnRb do
     @espn.get_results(@espn.resources[:professional][:coed][:all][:relative_url], @espn.methods[:news][:relative_url]).class.should eq(Net::HTTPOK)
   end
 
-  describe EspnResponse do
+  describe HeadlineResponse do
     context "returns the correct title information when #title is called" do
      it {@espn.all_headlines.titles.first.should eq("Trail Blazers 86, Hornets 74")}
      it {@espn.all_headlines.titles.last.should eq("Saint Mary's (Cal) 78, No. 24 Gonzaga 74") }
