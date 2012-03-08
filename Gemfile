@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rspec', '~> 2.8.0'
+gem 'rake'
 gem 'webmock'
 
 platform :jruby do
