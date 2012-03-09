@@ -28,8 +28,23 @@ module EspnRb
 
     def get_results(resource, method)
       http = Net::HTTP.new("api.espn.com")
-      request = Net::HTTP::Get.new("#{resource}#{method}?apikey=#{@api_key}")
+      request = Net::HTTP::Get.new("/#{EspnRb::API_VERSION}/#{resource}#{method}?apikey=#{@api_key}")
       HeadlineResponse.new JSON.parse(http.request(request).body)
+    end
+
+    def help
+      puts "-----------------------------Welcome to EspnRb.---------------------------------\n\n"
+      puts s = <<EOF
+                                        _.-=""=-._
+                                      .'\\\\-++++-//'.
+                                     (  ||      ||  )
+                                      './/      \\\\.'
+                                        `'-=..=-'`
+EOF
+      puts "--------------------------------------------------------------------------------"
+      puts "You are currently using the headlines api from here you can do the follow:\n\n"
+      puts "\t#{'Method'.ljust(25)} Description\n\n"
+      puts api_resources.map {|k,v| "\t#{(':' + k.to_s).ljust(25)} #{v[:description]}"}.join("\n")
     end
   end
 end
