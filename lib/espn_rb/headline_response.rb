@@ -20,6 +20,8 @@ class HeadlineResponse
   end
 
   class HeadlineItem
+    attr_reader :headline
+
     def initialize(opts)
       @headline = opts
     end

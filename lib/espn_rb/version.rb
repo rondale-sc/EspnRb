@@ -1,4 +1,4 @@
 module EspnRb
-  VERSION = "0.0.1"
+  VERSION = "0.0.3"
   API_VERSION = "v1"
 end
