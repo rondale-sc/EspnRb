@@ -4,6 +4,8 @@ A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically p
 
 ## Installation
 
+### As of Version 0.0.3
+
 Add this line to your application's Gemfile:
     
     gem 'espn_rb'
@@ -21,9 +23,11 @@ espn = Espn.headlines
 espn.all
 ```
 
-Which will return an HeadlineResponse object.  To get the response straight from the horses' mouth:
+Which will return an HeadlineResponse object.
 
 #### Get ESPN response as JSON
+
+To get the response straight from the horses' mouth:
 
 ```ruby
 # from above
@@ -32,9 +36,11 @@ espn.all.response
 #=> ESPN's response string as JSON
 ```
 
-The raw response from ESPN will give you the top ten stories meeting your criteria.  Since this is a basic collection and each headline share many common attributes there are collection methods defined on the HeadlineResponse object.  Use them like so.
+The raw response from ESPN will give you the top ten stories meeting your criteria.  
 
 #### Collections
+
+Since the above response is a basic collection and each headline share many common attributes there are collection methods defined on the HeadlineResponse object.  Use them like so.
 
 ```ruby
 # from above
@@ -59,6 +65,24 @@ espn = EspnRb.headlines
 
 espn.nba(:news) #=> HeadlineResponse
 espn.nba(:top)  #=> HeadlineResponse
+espn.nba({:for_date => "2012-03-09"}) #=> HeadlineResponse
+
+```
+
+#### HeadlineItem
+
+The HeadlineResponse Object holdes in it the headlines split into HeadlineItems.  Here is where you can get Specific information about each story.  Here are some of the options.
+
+```ruby
+espn = EspnRb.headlines
+headline_response = espn.nba[2] #=> HeadlineItem
+
+headline_response.web_url #=> "http://sports.espn.go.com/espn/wire?section=nba&id=7664408&ex_cid=espnapi_public"
+headline_response.id #=> 7664408
+headline_response.title #=> "Mavericks-Kings Preview"
+
+# More to come in future versions.
+headline_response.headline #=> JSON hash from original response.
 ```
 
 #### HELP
