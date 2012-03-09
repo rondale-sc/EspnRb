@@ -8,10 +8,7 @@ Add this line to your application's Gemfile:
     
     gem 'espn_rb'
 
-## Usage
-
-
-## Headines
+## Espn Headines
 
 Instantiate the EspnRb object and check the headlines.
 
