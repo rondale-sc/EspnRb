@@ -5,14 +5,8 @@ require 'espn_rb/headline_response.rb'
 require 'json'
 require "net/http"
 
-class EspnRb
-  include Headline
-
-  attr_reader :api_key
-
-  def initialize(opts=nil)
-    @api_key = opts && opts[:api_key].nil? ? opts[:api_key] : ENV['espn_api_key']
-    raise StandardError, "You must specify an API key." if @api_key.nil?
-    create_headline_readers
+module EspnRb
+  def self.headlines(options=nil)
+    EspnRb::Headline.new(options)
   end
 end

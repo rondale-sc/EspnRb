@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EspnRb do
   before(:each) do
-    @espn = EspnRb.new
+    @espn = EspnRb.headlines
 
     # Stub request for valid #all_headlines call
     stub_request(:get, "http://api.espn.com/sports/news?apikey=#{@espn.api_key}").to_return(
