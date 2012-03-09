@@ -28,7 +28,7 @@ module EspnRb
 
     def get_results(resource, method)
       http = Net::HTTP.new("api.espn.com")
-      request = Net::HTTP::Get.new("/#{EspnRb::API_VERSION}/#{resource}#{method}?apikey=#{@api_key}")
+      request = Net::HTTP::Get.new("/#{EspnRb::API_VERSION}#{resource}#{method}?apikey=#{@api_key}")
       HeadlineResponse.new JSON.parse(http.request(request).body)
     end
 

@@ -5,7 +5,7 @@ describe EspnRb do
     @espn = EspnRb.headlines
 
     # Stub request for valid #all_headlines call
-    stub_request(:get, "http://api.espn.com/sports/news?apikey=#{@espn.api_key}").to_return(
+    stub_request(:get, "http://api.espn.com/v1/sports/news?apikey=#{@espn.api_key}").to_return(
                     :status => 200,
                     :body => File.read('spec/mock_requests/all_headlines_request.txt'),
                     :headers => {})
