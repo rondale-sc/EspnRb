@@ -5,6 +5,7 @@ A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically p
 ## Installation
 
 Add this line to your application's Gemfile:
+    
     gem 'espn_rb'
 
 ## Usage
