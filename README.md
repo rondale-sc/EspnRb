@@ -9,6 +9,25 @@ A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically p
 Add this line to your application's Gemfile:
     
     gem 'espn_rb'
+    
+In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.  
+
+
+## Set your API key
+
+The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:
+
+```sh
+ export espn_api_key=YOUR_SUPER_SECRET_API_KEY 
+```
+
+If you want to pass it in to your objects you may do so explicitly like so:
+
+```ruby
+  espn = EspnRb.headlines(:api_key => YOUR_SUPER_SECRET_API_KEY)
+```
+
+For the sake of simplicity all my examples will assume that you have exported the API key as an environment variable. 
 
 ## Espn Headines
 
