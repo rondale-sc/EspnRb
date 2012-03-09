@@ -18,7 +18,7 @@ In order to use espn_rb you need to first get an API key from ESPN [ESPN api req
 The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:
 
 ```sh
- export espn_api_key=YOUR_SUPER_SECRET_API_KEY 
+ $ export espn_api_key=YOUR_SUPER_SECRET_API_KEY 
 ```
 
 If you want to pass it in to your objects you may do so explicitly like so:
