@@ -16,7 +16,7 @@ Instantiate the EspnRb object and check the headlines.
 
 ```ruby
 require 'espn_rb'
-espn = Espn.rb
+espn = Espn.headlines
 
 espn.all
 ```
@@ -55,9 +55,10 @@ espn.all.response.descriptions
 When calling on the api to get new data you can pass any (soon) of the methods supported by the API.
 
 ```ruby
-espn = EspnRb.new
-espn.basketball(:news) #=> HeadlineResponse
-espn.basketball(:top)  #=> HeadlineResponse
+espn = EspnRb.headlines
+
+espn.nba(:news) #=> HeadlineResponse
+espn.nba(:top)  #=> HeadlineResponse
 ```
 
 
