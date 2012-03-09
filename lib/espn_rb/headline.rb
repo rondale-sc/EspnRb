@@ -1,26 +1,25 @@
 module Headline
-  def resources
-    YAML::load(File.read('lib/espn_rb/headline_resources.yaml'))
+  def api_resources
+    @api_resources ||= YAML::load(File.read('lib/espn_rb/headline_resources.yaml'))
   end
 
-  def methods
-    YAML::load(File.read('lib/espn_rb/headline_methods.yaml'))
+  def api_methods
+    @api_methods ||= YAML::load(File.read('lib/espn_rb/headline_methods.yaml'))
+  end
+
+  def create_headline_readers
+    api_resources.each do |k,v|
+      define_singleton_method(k) do |opt=nil|
+        api_method = api_methods.keys.include?(opt) ? opt : :news
+        get_results(v[:url], api_methods[api_method][:url])
+      end
+    end
   end
 
   def get_results(resource, method)
     http = Net::HTTP.new("api.espn.com")
     request = Net::HTTP::Get.new("#{resource}#{method}?apikey=#{api_key}")
-    http.request(request)
-  end
-
-  def all_headlines(opts=nil)
-    response = get_results(resources[:professional][:coed][:all][:relative_url], methods[:news][:relative_url])
-    HeadlineResponse.new JSON.parse(response.body)
-  end
-
-  def basketball(mens=true)
-    response = get_results(resources[:professional][:mens][:basketball][:relative_url], methods[:news][:relative_url])
-    HeadlineResponse.new JSON.parse(response.body)
+    HeadlineResponse.new JSON.parse(http.request(request).body)
   end
 
   def api_key

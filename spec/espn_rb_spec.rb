@@ -11,21 +11,18 @@ describe EspnRb do
                     :headers => {})
   end
 
-  it "should return valid EspnResponse when #all_headlines is called." do
-    @espn.all_headlines.class.should eq(HeadlineResponse)
+  it "should return valid HeadlineResponse when #all is called." do
+    @espn.all.class.should eq(HeadlineResponse)
   end
 
-  specify { @espn.resources.class.should eq(Hash) }
-  specify { @espn.methods.class.should eq(Hash) }
-
   it "get_results from api.espn.com" do
-    @espn.get_results(@espn.resources[:professional][:coed][:all][:relative_url], @espn.methods[:news][:relative_url]).class.should eq(Net::HTTPOK)
+    @espn.get_results(@espn.api_resources[:all][:url], @espn.api_methods[:news][:url]).class.should eq(HeadlineResponse)
   end
 
   describe HeadlineResponse do
     context "returns the correct title information when #title is called" do
-     it {@espn.all_headlines.titles.first.should eq("Trail Blazers 86, Hornets 74")}
-     it {@espn.all_headlines.titles.last.should eq("Saint Mary's (Cal) 78, No. 24 Gonzaga 74") }
+     it {@espn.all.titles.first.should eq("Trail Blazers 86, Hornets 74")}
+     it {@espn.all.titles.last.should eq("Saint Mary's (Cal) 78, No. 24 Gonzaga 74") }
     end
   end
 end

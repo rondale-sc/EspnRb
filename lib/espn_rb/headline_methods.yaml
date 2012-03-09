@@ -1,10 +1,10 @@
 ---
 :news:
-  :relative_url: /news
+  :url: /news
   :description: Retrieves a stream of all news for current date.
 :news_headlines:
-  :relative_path: /news/headlines
+  :url: /news/headlines
   :description: Retrieves top stories as selected by ESPN editorial staff.
 :top:
-  :relative_path: news/headlines/top
+  :url: news/headlines/top
   :description: Retrieves top stories as shown on ESPN.com home page. Only applicable to /sports/ resource.
