@@ -16,7 +16,7 @@ Instantiate the EspnRb object and check the headlines.
 
 ```ruby
 require 'espn_rb'
-espn = Espn.rb
+espn = Espn.headlines
 
 espn.all
 ```
@@ -55,12 +55,43 @@ espn.all.response.descriptions
 When calling on the api to get new data you can pass any (soon) of the methods supported by the API.
 
 ```ruby
-espn = EspnRb.new
-espn.basketball(:news) #=> HeadlineResponse
-espn.basketball(:top)  #=> HeadlineResponse
+espn = EspnRb.headlines
+
+espn.nba(:news) #=> HeadlineResponse
+espn.nba(:top)  #=> HeadlineResponse
 ```
 
+#### HELP
 
+```ruby
+espn = Espn.headlines
+espn.help
+#=> methods/descriptions below....
+```
+You are currently using the headlines api from here you can do the follow:
+
+    Method                    Description
+
+	:all                      News across all sports/sections
+	:golf                     Golf
+	:boxing                   Boxing
+	:mma                      Mixed Martial Arts
+	:racing                   Auto Racing
+	:soccer                   Professional soccer (US focus)
+	:tennis                   Tennis
+	:mlb                      Major League Baseball (MLB)
+	:nba                      National Basketball Association (NBA)
+	:nfl                      National Football League (NFL)
+	:nhl                      National Hockey League (NHL)
+	:nascar                   NASCAR racing
+	:wnba                     Women's National Basketball Association (WNBA)
+	:ncaa_basketball          NCAA Men's College Basketball
+	:ncaa_football            NCAA College Football
+	:ncaa_womens_basketball   NCAA Women's College Basketball
+
+
+
+---
 I am actively work on this. Check the commit log to see where I'm at, and check the issues to see how you can contribute.
 
 
