@@ -6,5 +6,8 @@
   :url: /news/headlines
   :description: Retrieves top stories as selected by ESPN editorial staff.
 :top:
-  :url: news/headlines/top
+  :url: /news/headlines/top
   :description: Retrieves top stories as shown on ESPN.com home page. Only applicable to /sports/ resource.
+:for_date:
+  :url: /news/dates/:yyyymmdd
+  :description: Retrieves news for a specific date.
