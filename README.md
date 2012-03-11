@@ -4,11 +4,9 @@ A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically p
 
 ## Installation
 
-### As of Version 0.0.4
-
 Add this line to your application's Gemfile:
     
-    gem "espn_rb", "~> 0.0.4"
+    gem "espn_rb"
     
 In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.  
 
