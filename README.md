@@ -4,11 +4,11 @@ A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically p
 
 ## Installation
 
-### As of Version 0.0.3
+### As of Version 0.0.4
 
 Add this line to your application's Gemfile:
     
-    gem 'espn_rb'
+    gem "espn_rb", "~> 0.0.4"
     
 In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.  
 
@@ -40,6 +40,7 @@ require 'espn_rb'
 espn = Espn.headlines
 
 espn.all
+#=> HeadlineResponse
 ```
 
 Which will return an HeadlineResponse object.
@@ -56,6 +57,48 @@ espn.all.response
 ```
 
 The raw response from ESPN will give you the top ten stories meeting your criteria.  
+
+### HeadlineResponse
+
+Now includes Enumerable which allows you to treat the HeadlineResponse as an iterable object.  
+
+```ruby
+espn = EspnRb.headlines
+espn.all.each do |headline_item| 
+  puts "----- Headline: #{headline_item.title}----\n"
+  puts headline_item.athletes
+  puts "\n-----------------------------------\n\n"
+end
+
+# ----- Headline: Warriors-Clippers Preview----
+# NBA
+# Chris Paul
+# Los Angeles Clippers
+# Golden State Warriors
+# Blake Griffin
+# Mo Williams
+# David Lee
+# Stephen Curry
+# 
+# -----------------------------------
+# 
+# ----- Headline: Red Sox 5, Rays 0----
+# MLB
+# Daniel Bard
+# Boston Red Sox
+# Tampa Bay Rays
+# Alfredo Aceves
+# Jose Iglesias
+# Wade Davis
+# Jeff Keppinger
+# Elliot Johnson
+# Evan Longoria
+# Matt Moore
+# Luke Scott
+# David Price
+# 
+# -----------------------------------
+```
 
 #### Collections
 
@@ -84,13 +127,14 @@ espn = EspnRb.headlines
 
 espn.nba(:news) #=> HeadlineResponse
 espn.nba(:top)  #=> HeadlineResponse
-espn.nba({:for_date => "2012-03-09"}) #=> HeadlineResponse
+espn.nba({:for_date => "2012-03-09"}) #=> HeadlineResponse # Will include all stories for that date
+espn.nba({:for_athlete => "1234" #=> HeadlineResponse # Will include all stories for that athleteId
 
 ```
 
-#### HeadlineItem
+### HeadlineItem
 
-The HeadlineResponse Object holdes in it the headlines split into HeadlineItems.  Here is where you can get Specific information about each story.  Here are some of the options.
+The HeadlineResponse Object holdes in it the headlines split into HeadlineItems.  Here is where you can get Specific information about each story.  Some of the options are:
 
 ```ruby
 espn = EspnRb.headlines
@@ -99,6 +143,9 @@ headline_response = espn.nba[2] #=> HeadlineItem
 headline_response.web_url #=> "http://sports.espn.go.com/espn/wire?section=nba&id=7664408&ex_cid=espnapi_public"
 headline_response.id #=> 7664408
 headline_response.title #=> "Mavericks-Kings Preview"
+headline_response.athletes #=> ["Johnny B", "Freddie Flintstone", "Etc"]
+headline_response.leagues #=> ["46"]
+headline_response.athlete_ids #=> ["123", "132", "123"]
 
 # More to come in future versions.
 headline_response.headline #=> JSON hash from original response.
