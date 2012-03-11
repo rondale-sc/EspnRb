@@ -4,14 +4,14 @@ class HeadlineResponse
   attr_reader :response,:responses
 
   def initialize(response)
-    @response = @response || response
+    @response  = @response || response
     @responses = @response['headlines'].map {|h| HeadlineItem.new(h)}
-    @reports = create_reports(reponse)
+    @reports   = create_reports(reponse)
   end
 
   def each &block
     @responses.each do |response|
-       if block_given?
+      if block_given?
         block.call response
       else
         yield response
