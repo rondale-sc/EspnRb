@@ -19,6 +19,11 @@ describe EspnRb::Headline do
     @espn.get_results(@espn.api_resources[:all][:url], @espn.api_methods[:news][:url]).class.should eq(HeadlineResponse)
   end
 
+  it "@api_key should be set" do
+    espn = EspnRb.headlines(:api_key => "abc123")
+    espn.api_key.should eq "abc123"
+  end
+
   context "api_resources and api_methods should be defined properly (Ensure no typos)" do
     it {@espn.api_resources[:nba][:url].should eq("/sports/basketball/nba") }
     it {@espn.api_resources[:all][:url].should eq("/sports") }
