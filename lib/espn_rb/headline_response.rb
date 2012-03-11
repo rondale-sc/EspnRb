@@ -1,10 +1,22 @@
 class HeadlineResponse
+  include Enumerable
+
   attr_reader :response,:responses
 
   def initialize(response)
     @response = @response || response
     @responses = @response['headlines'].map {|h| HeadlineItem.new(h)}
     @reports = create_reports(reponse)
+  end
+
+  def each &block
+    @responses.each do |response|
+       if block_given?
+        block.call response
+      else
+        yield response
+      end
+    end
   end
 
   def [](int)
@@ -16,34 +28,6 @@ class HeadlineResponse
 
     if %w{headlines descriptions sources bylines types}.include?(sym.to_s)
       @response["headlines"].map {|h| h[sym.to_s[0..-2]]  }
-    end
-  end
-
-  class HeadlineItem
-    attr_reader :headline
-
-    def initialize(opts)
-      @headline = opts
-    end
-
-    def web_url(mobile=false)
-      (mobile == true) ? @headline["links"]["mobile"]["href"] : @headline["links"]["web"]["href"]
-    end
-
-    def title
-      @headline["headline"]
-    end
-
-    def id
-      @headline["id"]
-    end
-
-    def api_url
-      @headline["links"]["api"]["news"]["href"]
-    end
-
-    def categories
-      @headline["categories"]
     end
   end
 end

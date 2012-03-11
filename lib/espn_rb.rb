@@ -1,6 +1,7 @@
 require "espn_rb/version"
 require "espn_rb/headline.rb"
 require 'espn_rb/headline_response.rb'
+require 'espn_rb/headline_item.rb'
 require 'espn_rb/utilities.rb'
 
 require 'json'
