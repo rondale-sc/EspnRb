@@ -12,7 +12,7 @@ class HeadlineResponse
   end
 
   def method_missing(sym, *args)
-    sym.to_s == "titles"? sym = :headlines : sym
+    sym.to_s == "titles" ? sym = :headlines : sym
 
     if %w{headlines descriptions sources bylines types}.include?(sym.to_s)
       @response["headlines"].map {|h| h[sym.to_s[0..-2]]  }
@@ -40,6 +40,10 @@ class HeadlineResponse
 
     def api_url
       @headline["links"]["api"]["news"]["href"]
+    end
+
+    def categories
+      @headline["categories"]
     end
   end
 end

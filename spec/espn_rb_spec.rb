@@ -11,11 +11,11 @@ describe EspnRb::Headline do
                     :headers => {})
   end
 
-  it "should return valid HeadlineResponse when #all is called." do
+  it "#all should return valid HeadlineResponse" do
     @espn.all.class.should eq(HeadlineResponse)
   end
 
-  it "get_results from api.espn.com" do
+  it "#get_results from api.espn.com" do
     @espn.get_results(@espn.api_resources[:all][:url], @espn.api_methods[:news][:url]).class.should eq(HeadlineResponse)
   end
 
@@ -40,9 +40,20 @@ describe EspnRb::Headline do
 
 
   describe HeadlineResponse do
-    context "returns the correct title information when #title is called" do
+    context "Method missing provides correct collection methods." do
      it {@espn.all.titles.first.should eq("Trail Blazers 86, Hornets 74")}
-     it {@espn.all.titles.last.should eq("Saint Mary's (Cal) 78, No. 24 Gonzaga 74") }
+     it {@espn.all.descriptions.last.should eq("With the score deadlocked in overtime and the ball bouncing free, opposing guards Matthew Dellavedova and Kevin Pangos collided near the scorer's table.") }
+     it {@espn.all.sources.last.should eq("Associated Press") }
+     it {@espn.all.types.last.should eq("Wire") }
+    end
+  end
+
+  describe HeadlineResponse::HeadlineItem do
+    context "HeadlineItem returns proper item info when requested" do
+     it {  @espn.all[1].web_url.should eq('http://sports.espn.go.com/espn/wire?section=nhl&id=7651009&ex_cid=espnapi_public') }
+     it { @espn.all[1].title.should eq('Oilers-Sharks Preview') }
+     it { @espn.all[1].api_url.should eq('http://api.espn.com/v1/sports/news/7651009') }
+     it { @espn.all[1].id.should eq(7651009) }
     end
   end
 end

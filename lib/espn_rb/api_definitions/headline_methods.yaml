@@ -11,3 +11,6 @@
 :for_date:
   :url: /news/dates/:yyyymmdd
   :description: Retrieves news for a specific date.
+:for_athlete:
+  :url: /athletes/:athleteId/news
+  :description: Retrieves stories about a particular player/athlete.
