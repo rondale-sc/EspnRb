@@ -3,11 +3,11 @@ module EspnRb
     def self.help(str)
       puts "-----------------------------Welcome to EspnRb.---------------------------------\n\n"
       puts s = <<EOF
-                                        _.-=""=-._
-                                      .'\\\\-++++-//'.
-                                     (  ||      ||  )
-                                      './/      \\\\.'
-                                        `'-=..=-'`
+                               _.-=""=-._
+                             .'\\\\-++++-//'.
+                            (  ||      ||  )
+                             './/      \\\\.'
+                               `'-=..=-'`
 EOF
       puts "--------------------------------------------------------------------------------"
       puts "You are currently using the headlines api from here you can do the follow:\n\n"
