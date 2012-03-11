@@ -50,10 +50,19 @@ describe EspnRb::Headline do
 
   describe HeadlineResponse::HeadlineItem do
     context "HeadlineItem returns proper item info when requested" do
-     it {  @espn.all[1].web_url.should eq('http://sports.espn.go.com/espn/wire?section=nhl&id=7651009&ex_cid=espnapi_public') }
-     it { @espn.all[1].title.should eq('Oilers-Sharks Preview') }
-     it { @espn.all[1].api_url.should eq('http://api.espn.com/v1/sports/news/7651009') }
-     it { @espn.all[1].id.should eq(7651009) }
+     it { @espn.all[1].web_url.should  == 'http://sports.espn.go.com/espn/wire?section=nhl&id=7651009&ex_cid=espnapi_public' }
+     it { @espn.all[1].title.should  == 'Oilers-Sharks Preview' }
+     it { @espn.all[1].api_url.should  == 'http://api.espn.com/v1/sports/news/7651009' }
+     it { @espn.all[1].id.should  == 7651009 }
+    end
+
+    context "HeadlineItem should return an array of requested entries from categories sub-hash" do
+      it {@espn.all[1].athletes.should == ["NHL", "San Jose Sharks", "Edmonton Oilers", "Douglas Murray",
+                                           "Logan Couture", "Patrick Marleau", "Joe Thornton", "Anaheim Ducks",
+                                           "Jordan Eberle", "Shawn Horcoff", "Taylor Hall"] }
+
+      it {@espn.all[1].leagues.should == [90] }
+      it {@espn.all[1].athlete_ids.should  == [2100, 3773, 576, 939, 5032, 1080, 5428] }
     end
   end
 end
