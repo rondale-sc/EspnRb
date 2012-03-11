@@ -10,11 +10,11 @@ module EspnRb
     end
 
     def api_resources
-      @api_resources ||= YAML::load(File.read('lib/espn_rb/api_definitions/headline_resources.yaml'))
+      @api_resources ||= YAML::load(File.read(File.expand_path(File.join(File.dirname(__FILE__), "..", 'espn_rb/api_definitions/headline_resources.yaml'))))
     end
 
     def api_methods
-      @api_methods ||= YAML::load(File.read('lib/espn_rb/api_definitions/headline_methods.yaml'))
+      @api_methods ||= YAML::load(File.read(File.expand_path(File.join(File.dirname(__FILE__), "..", 'espn_rb/api_definitions/headline_methods.yaml'))))
     end
 
     def get_results(resource, method)
