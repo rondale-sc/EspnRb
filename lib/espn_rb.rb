@@ -10,6 +10,11 @@ require "net/http"
 module EspnRb
   include EspnRb::Utilities
 
+  # Returns an EspnRb::Headline object.
+  #
+  # @param [Hash] options the options to create the Headline object.
+  # @option options [String] :api_key Your ESPN developer api key.
+  # @return [EspnRb::Headline] entry point to Espn Headline API.
   def self.headlines(options=nil)
     EspnRb::Headline.new(options)
   end
