@@ -56,7 +56,7 @@ module EspnRb
     # @example Call with Hash (for_date)
     #   get_api_method({:for_date => "2012-01-01"}) #=> '/news/dates/20120101'
     # @option options [String] :arg When string is passed and :arg
-    # is available it will return the url associated with that :arg from EspnRb::Headline.api_methods
+    #   is available it will return the url associated with that :arg from EspnRb::Headline.api_methods
     # @option options [Hash] :arg When Hash will pass :arg to opt_from_hash
     #
     # @return [String] a url entry from EspnRb::Headline.api_methods defaults to :news
@@ -80,13 +80,15 @@ module EspnRb
     end
 
     # Takes EspnRb::Headline.api_methods[:for_athlete][:url] and subs out the options passed by user
-    # @example for_athlete({:for_athlete => "123"}) => '/athletes/123/news'
+    # @example internal call
+    #   for_athlete({:for_athlete => "123"}) => '/athletes/123/news'
     def for_athlete(opt)
       api_methods[:for_athlete][:url].gsub(":athleteId", opt[:for_athlete])
     end
 
     # Takes EspnRb::Headline.api_methods[:for_date][:url] and subs out the options passed by user
-    # @example for_date({:for_date => "2012-01-01"}) => '/news/dates/20120101'
+    # @example internal call
+    #   for_date({:for_date => "2012-01-01"}) => '/news/dates/20120101'
     def for_date(opt)
       api_methods[:for_date][:url].gsub(":yyyymmdd", Date.parse(opt[:for_date]).strftime("%Y%m%d"))
     end
