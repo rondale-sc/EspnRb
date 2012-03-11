@@ -3,18 +3,18 @@ module EspnRb
     attr_reader :api_key
 
     def initialize(opts)
-      @api_key = opts && opts[:api_key].nil? ? opts[:api_key] : ENV['espn_api_key']
+      @api_key = opts && !opts[:api_key].nil? ? opts[:api_key] : ENV['espn_api_key']
       raise StandardError, "You must specify an API key." if @api_key.nil?
 
       create_headline_methods
     end
 
     def api_resources
-      @api_resources ||= YAML::load(File.read('lib/espn_rb/api_definitions/headline_resources.yaml'))
+      @api_resources ||= YAML::load(File.read(File.expand_path(File.join(File.dirname(__FILE__), "..", 'espn_rb/api_definitions/headline_resources.yaml'))))
     end
 
     def api_methods
-      @api_methods ||= YAML::load(File.read('lib/espn_rb/api_definitions/headline_methods.yaml'))
+      @api_methods ||= YAML::load(File.read(File.expand_path(File.join(File.dirname(__FILE__), "..", 'espn_rb/api_definitions/headline_methods.yaml'))))
     end
 
     def get_results(resource, method)
