@@ -2,6 +2,8 @@
 
 A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically pleasing way, with the ESPN api.  Currently it only allows access to the publicly available Headline API which can be found [here](http://developer.espn.com/docs/headlines).  I am working to bring more of ESPN's features to espn_rb.  While I do that I'll try to keep this document updated to its current functionality.  That said, I hope you enjoy. 
 
+![ESPN api logo](http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png "See more branding options at developer.espn.com/branding")  in mind.  ^_^
+
 ## Installation
 
 Add this line to your application's Gemfile:
