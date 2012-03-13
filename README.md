@@ -45,7 +45,7 @@ espn.all
 
 Which will return an HeadlineResponse object.
 
-#### Get ESPN response as JSON
+#### Get ESPN response as a hash
 
 To get the response straight from the horses' mouth:
 
@@ -53,7 +53,7 @@ To get the response straight from the horses' mouth:
 # from above
   
 espn.all.response
-#=> ESPN's response string as JSON
+#=> ESPN's response string as a hash
 ```
 
 The raw response from ESPN will give you the top ten stories meeting your criteria.  
@@ -127,8 +127,8 @@ espn = EspnRb.headlines
 
 espn.nba(:news) #=> HeadlineResponse
 espn.nba(:top)  #=> HeadlineResponse
-espn.nba({:for_date => "2012-03-09"}) #=> HeadlineResponse # Will include all stories for that date
-espn.nba({:for_athlete => "1234" #=> HeadlineResponse # Will include all stories for that athleteId
+espn.nba(:for_date => "2012-03-09")  #=> HeadlineResponse # Will include all stories for that date
+espn.nba(:for_athlete => "1234")     #=> HeadlineResponse # Will include all stories for that athleteId
 
 ```
 
