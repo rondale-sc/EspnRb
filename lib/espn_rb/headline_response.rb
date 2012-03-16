@@ -12,13 +12,7 @@ class HeadlineResponse
 
   # define each so that Enumerable methods work properly.
   def each &block
-    @responses.each do |response|
-      if block_given?
-        block.call response
-      else
-        yield response
-      end
-    end
+    @responses.each &block
   end
 
   # Allows the user to specify which HeadlineItem they'd like to work with via it's index in the @responses array
