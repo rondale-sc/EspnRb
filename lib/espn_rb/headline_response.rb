@@ -3,7 +3,7 @@ class HeadlineResponse
 
   attr_reader :response,:responses
 
-  # Sets response from EspnRb::Headline.get_results.  Splits response object into composite parts
+  # Sets response from EspnRb::Headline#get_results.  Splits response object into composite parts
   # so that we can include enumerable
   def initialize(response)
     @response  = @response || response
@@ -32,9 +32,9 @@ class HeadlineResponse
   # @note available methods are headlines, descriptions, sources, bylines, types
   #
   # @example Valid method call
-  #   EspnRb::Headline.nba.titles #=> ['title1', 'title2', 'title3', 'title4', 'etc']
+  #   EspnRb.headlines.nba.titles #=> ['title1', 'title2', 'title3', 'title4', 'etc']
   # @example Invalid method call
-  #   EspnRb::Headline.nba.not_an_available_method #=> nil
+  #   EspnRb.headlines.nba.not_an_available_method #=> nil
   # @return [Array] array of like items or nil
   def method_missing(sym, *args)
     sym.to_s == "titles" ? sym = :headlines : sym

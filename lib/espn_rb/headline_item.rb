@@ -7,7 +7,7 @@ class HeadlineResponse
     end
 
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.nba.first.web_url => "http://some-valid-nba-article"
     # @return [String] web_url for Item
     def web_url(mobile=false)
@@ -15,7 +15,7 @@ class HeadlineResponse
     end
 
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.ncaa_football.first.title => "Gators Win!!"
     # @return [String] title for Item
     def title
@@ -24,7 +24,7 @@ class HeadlineResponse
 
 
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.ncaa_football.first.id => 1234
     # @return [Integer] id for Item
     def id
@@ -32,7 +32,7 @@ class HeadlineResponse
     end
 
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.nba.first.api_url => "http://some-valid-nba-article"
     # @return [String] api_url for Item
     def api_url
@@ -47,7 +47,7 @@ class HeadlineResponse
     # Provides access to categories sub-hash.  If available
     #
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.nba.first.athletes
     # #=> ["Johnny B", "Freddie Flintstone", "Etc"]
     def athletes
@@ -57,7 +57,7 @@ class HeadlineResponse
     # Provides access to categories sub-hash.  If available
     #
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.nba.first.leagues
     # #=> ["46"]
     def leagues
@@ -67,7 +67,7 @@ class HeadlineResponse
     # Provides access to categories sub-hash.  If available
     #
     # @example
-    #   espn = EspnRb::Headline
+    #   espn = EspnRb.headlines
     #   espn.nba.first.athlete_ids
     # #=> ["123", "132", "123"]
     def athlete_ids

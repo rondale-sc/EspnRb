@@ -33,7 +33,7 @@ module EspnRb
     end
 
     # This will define singleton methods for all resources defined
-    # in EspnRb::Headline.api_resources
+    # in EspnRb::Headline#api_resources
     #
     # @return [HeadlineResponse] which contains the espn response object and assocated methods.
     def create_headline_methods
@@ -86,7 +86,7 @@ module EspnRb
       api_methods[:for_athlete][:url].gsub(":athleteId", opt[:for_athlete])
     end
 
-    # Takes EspnRb::Headline.api_methods[:for_date][:url] and subs out the options passed by user
+    # Takes EspnRb::Headline#api_methods[:for_date][:url] and subs out the options passed by user
     # @example internal call
     #   for_date({:for_date => "2012-01-01"}) => '/news/dates/20120101'
     def for_date(opt)
