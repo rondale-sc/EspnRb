@@ -64,40 +64,19 @@ Now includes Enumerable which allows you to treat the HeadlineResponse as an ite
 
 ```ruby
 espn = EspnRb.headlines
-espn.all.each do |headline_item| 
-  puts "----- Headline: #{headline_item.title}----\n"
-  puts headline_item.athletes
-  puts "\n-----------------------------------\n\n"
-end
+espn.all.map(&:title)
 
-# ----- Headline: Warriors-Clippers Preview----
-# NBA
-# Chris Paul
-# Los Angeles Clippers
-# Golden State Warriors
-# Blake Griffin
-# Mo Williams
-# David Lee
-# Stephen Curry
-# 
-# -----------------------------------
-# 
-# ----- Headline: Red Sox 5, Rays 0----
-# MLB
-# Daniel Bard
-# Boston Red Sox
-# Tampa Bay Rays
-# Alfredo Aceves
-# Jose Iglesias
-# Wade Davis
-# Jeff Keppinger
-# Elliot Johnson
-# Evan Longoria
-# Matt Moore
-# Luke Scott
-# David Price
-# 
-# -----------------------------------
+#=> ["Celtics-Clippers Preview",
+#    "Warriors 97, Clippers 93",
+#    "Hawks 106, Kings 99",
+#    "Warriors-Clippers, Box",
+#    "Warriors 97, Clippers 93",
+#    "Hawks 106, Kings 99",
+#    "Bucks-Nets Preview",
+#    "Hawks-Kings, Box",
+#    "Grizzlies 94, Nuggets 91",
+#    "Grizzlies-Nuggets, Box"]
+
 ```
 
 #### Collections
