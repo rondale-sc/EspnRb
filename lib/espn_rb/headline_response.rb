@@ -29,11 +29,11 @@ class HeadlineResponse
   end
 
   # Returns the all the links associated with this HeadlineResponse
-  # @option options [String] :type Either web, api, or mobile.
+  # @option options [String] :type Either web, or mobile.
   # @return [Array] array of links.
   def links(type=nil)
-    type.nil? ? "web" : type
-    @response["headlines"].map{|r| r["links"]["web"]["href"] }
+    type = type.nil? ? "web" : type
+    @response["headlines"].map{|r| r["links"][type]["href"] }
   end
 
   # Defines a few collection methods to allow the user to view all of the @response like attributes
