@@ -2,13 +2,13 @@
 
 A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically pleasing way, with the ESPN api.  Currently it only allows access to the publicly available Headline API which can be found [here](http://developer.espn.com/docs/headlines).  I am working to bring more of ESPN's features to espn_rb.  While I do that I'll try to keep this document updated to its current functionality.  That said, I hope you enjoy. 
 
-## Installation
+![ESPN api logo](http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png "See more branding options at developer.espn.com/branding")  in mind.  ^_^
 
-### As of Version 0.0.4
+## Installation
 
 Add this line to your application's Gemfile:
     
-    gem "espn_rb", "~> 0.0.4"
+    gem "espn_rb"
     
 In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.  
 
@@ -45,7 +45,7 @@ espn.all
 
 Which will return an HeadlineResponse object.
 
-#### Get ESPN response as JSON
+#### Get ESPN response as a hash
 
 To get the response straight from the horses' mouth:
 
@@ -53,7 +53,7 @@ To get the response straight from the horses' mouth:
 # from above
   
 espn.all.response
-#=> ESPN's response string as JSON
+#=> ESPN's response string as a hash
 ```
 
 The raw response from ESPN will give you the top ten stories meeting your criteria.  
@@ -64,40 +64,19 @@ Now includes Enumerable which allows you to treat the HeadlineResponse as an ite
 
 ```ruby
 espn = EspnRb.headlines
-espn.all.each do |headline_item| 
-  puts "----- Headline: #{headline_item.title}----\n"
-  puts headline_item.athletes
-  puts "\n-----------------------------------\n\n"
-end
+espn.all.map(&:title)
 
-# ----- Headline: Warriors-Clippers Preview----
-# NBA
-# Chris Paul
-# Los Angeles Clippers
-# Golden State Warriors
-# Blake Griffin
-# Mo Williams
-# David Lee
-# Stephen Curry
-# 
-# -----------------------------------
-# 
-# ----- Headline: Red Sox 5, Rays 0----
-# MLB
-# Daniel Bard
-# Boston Red Sox
-# Tampa Bay Rays
-# Alfredo Aceves
-# Jose Iglesias
-# Wade Davis
-# Jeff Keppinger
-# Elliot Johnson
-# Evan Longoria
-# Matt Moore
-# Luke Scott
-# David Price
-# 
-# -----------------------------------
+#=> ["Celtics-Clippers Preview",
+#    "Warriors 97, Clippers 93",
+#    "Hawks 106, Kings 99",
+#    "Warriors-Clippers, Box",
+#    "Warriors 97, Clippers 93",
+#    "Hawks 106, Kings 99",
+#    "Bucks-Nets Preview",
+#    "Hawks-Kings, Box",
+#    "Grizzlies 94, Nuggets 91",
+#    "Grizzlies-Nuggets, Box"]
+
 ```
 
 #### Collections
@@ -127,8 +106,8 @@ espn = EspnRb.headlines
 
 espn.nba(:news) #=> HeadlineResponse
 espn.nba(:top)  #=> HeadlineResponse
-espn.nba({:for_date => "2012-03-09"}) #=> HeadlineResponse # Will include all stories for that date
-espn.nba({:for_athlete => "1234" #=> HeadlineResponse # Will include all stories for that athleteId
+espn.nba(:for_date => "2012-03-09")  #=> HeadlineResponse # Will include all stories for that date
+espn.nba(:for_athlete => "1234")     #=> HeadlineResponse # Will include all stories for that athleteId
 
 ```
 
