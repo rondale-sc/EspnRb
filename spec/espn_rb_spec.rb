@@ -59,6 +59,10 @@ describe EspnRb::Headline do
      it { @espn.all[1].title.should  == 'Oilers-Sharks Preview' }
      it { @espn.all[1].api_url.should  == 'http://api.espn.com/v1/sports/news/7651009' }
      it { @espn.all[1].id.should  == 7651009 }
+     it { @espn.all[1].title.should == "Oilers-Sharks Preview" }
+     it { @espn.all[1].description.should  == "The San Jose Sharks are trying to reverse what's becoming a free fall through the Western Conference standings."}
+     it { @espn.all[1].source.should == "Associated Press"}
+     it { @espn.all[1].last_modified.should == "2012-03-06T06:55:01Z"}
     end
 
     context "HeadlineItem should return an array of requested entries from categories sub-hash" do

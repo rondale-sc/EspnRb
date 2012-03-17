@@ -30,6 +30,7 @@ class HeadlineResponse
     @response["headlines"].map{|r| r["links"][type]["href"] }
   end
 
+
   # Defines a few collection methods to allow the user to view all of the @response like attributes
   # @note available methods are headlines, descriptions, sources, bylines, types
   #
