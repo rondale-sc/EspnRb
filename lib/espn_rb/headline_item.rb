@@ -48,6 +48,14 @@ class HeadlineResponse
 
     # @example
     #   espn = EspnRb.headlines
+    #   espn.ncaa_football.first.last_modified => "2012-03-16T04:07:56Z"
+    # @return [Hash] list of attributes of image for Item
+    def images
+      @headline["images"]
+    end
+
+    # @example
+    #   espn = EspnRb.headlines
     #   espn.ncaa_football.first.id => '1234'
     # @return [Integer] id for Item
     def id
