@@ -51,7 +51,7 @@ class HeadlineResponse
     #   espn.ncaa_football.first.last_modified => "2012-03-16T04:07:56Z"
     # @return [Hash] list of attributes of image for Item
     def images
-      @headline["images"]
+      Images.new @headline["images"]
     end
 
     # @example
