@@ -1,16 +1,16 @@
 # EspnRb
 
-A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically pleasing way, with the ESPN api.  Currently it only allows access to the publicly available Headline API which can be found [here](http://developer.espn.com/docs/headlines).  I am working to bring more of ESPN's features to espn_rb.  While I do that I'll try to keep this document updated to its current functionality.  That said, I hope you enjoy. 
+A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically pleasing way, with the ESPN api.  Currently it only allows access to the publicly available Headline API which can be found [here](http://developer.espn.com/docs/headlines).  I am working to bring more of ESPN's features to espn_rb.  While I do that I'll try to keep this document updated to its current functionality.  That said, I hope you enjoy.
 
 ![ESPN api logo](http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png "See more branding options at developer.espn.com/branding")  in mind.  ^_^
 
 ## Installation
 
 Add this line to your application's Gemfile:
-    
+
     gem "espn_rb"
-    
-In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.  
+
+In order to use espn_rb you need to first get an API key from ESPN [ESPN api request](http://developer.espn.com/member/register).  Once you've gotten that squared away you can use the public requests straight away.
 
 
 ## Set your API key
@@ -18,7 +18,7 @@ In order to use espn_rb you need to first get an API key from ESPN [ESPN api req
 The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:
 
 ```sh
- $ export espn_api_key=YOUR_SUPER_SECRET_API_KEY 
+ $ export espn_api_key=YOUR_SUPER_SECRET_API_KEY
 ```
 
 If you want to pass it in to your objects you may do so explicitly like so:
@@ -27,7 +27,7 @@ If you want to pass it in to your objects you may do so explicitly like so:
   espn = EspnRb.headlines(:api_key => YOUR_SUPER_SECRET_API_KEY)
 ```
 
-For the sake of simplicity all my examples will assume that you have exported the API key as an environment variable. 
+For the sake of simplicity all my examples will assume that you have exported the API key as an environment variable.
 
 ## Espn Headines
 
@@ -51,16 +51,16 @@ To get the response straight from the horses' mouth:
 
 ```ruby
 # from above
-  
+
 espn.all.response
 #=> ESPN's response string as a hash
 ```
 
-The raw response from ESPN will give you the top ten stories meeting your criteria.  
+The raw response from ESPN will give you the top ten stories meeting your criteria.
 
 ### HeadlineResponse
 
-Now includes Enumerable which allows you to treat the HeadlineResponse as an iterable object.  
+Now includes Enumerable which allows you to treat the HeadlineResponse as an iterable object.
 
 ```ruby
 espn = EspnRb.headlines
@@ -88,9 +88,9 @@ Since the above response is a basic collection and each headline share many comm
 
 # Available methods are [headlines descriptions sources bylines types]
 
-espn.all.response.titles 
+espn.all.response.titles
 #=> ["array", "of", "ESPN", "titles"]
-    
+
 espn.all.response.descriptions
 #=> ["array", "of", "ESPN", "descriptions"]
 
@@ -117,19 +117,38 @@ The HeadlineResponse Object holdes in it the headlines split into HeadlineItems.
 
 ```ruby
 espn = EspnRb.headlines
-headline_response = espn.nba[2] #=> HeadlineItem
+headline_item = espn.nba[2] #=> HeadlineItem
 
-headline_response.web_url #=> "http://sports.espn.go.com/espn/wire?section=nba&id=7664408&ex_cid=espnapi_public"
-headline_response.id #=> 7664408
-headline_response.title #=> "Mavericks-Kings Preview"
-headline_response.athletes #=> ["Johnny B", "Freddie Flintstone", "Etc"]
-headline_response.leagues #=> ["46"]
-headline_response.athlete_ids #=> ["123", "132", "123"]
+headline_item.web_url #=> "http://sports.espn.go.com/espn/wire?section=nba&id=7664408&ex_cid=espnapi_public"
+headline_item.id #=> 7664408
+headline_item.title #=> "Mavericks-Kings Preview"
+headline_item.athletes #=> ["Johnny B", "Freddie Flintstone", "Etc"]
+headline_item.leagues #=> ["46"]
+headline_item.athlete_ids #=> ["123", "132", "123"]
 
 # More to come in future versions.
 headline_response.headline #=> JSON hash from original response.
 ```
 
+HeadlineItem will now also respond to #images which will return an HeadlineResponse::HeadlineItem::Images class which contains the images associated with the HeadlineItem in a class that is also enumerable which lets you access the images with nice little methods like:
+
+```ruby
+espn = EspnRb.headlines
+headline_item = espn.nfl[2]
+
+headline_item.images => HeadlineResponse::HeadlineItem::Images
+
+# or to actually use the images
+
+images = headline_item.images
+
+images.first.landscape #=> true
+images.first.url #=> http://path-to-img.com/blah-blah-blah
+
+# or list all the urls
+
+images.map(&:url) #=>  ["list", "of", "image", "urls"]
+```
 #### HELP
 
 ```ruby
