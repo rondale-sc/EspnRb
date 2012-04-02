@@ -1,0 +1,273 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Espnrb</title>
+  <meta name="description" content="Ruby wrapper for the ESPN api.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Espnrb</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Ruby wrapper for the ESPN api.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/rondale-sc/EspnRb/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/rondale-sc/EspnRb/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/rondale-sc/EspnRb" class="code">fork Espnrb on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>EspnRb</h1>
+
+<p>A ruby wrapper for the ESPN api.  It allows you to interact, in a semantically pleasing way, with the ESPN api.  Currently it only allows access to the publicly available Headline API which can be found <a href="http://developer.espn.com/docs/headlines">here</a>.  I am working to bring more of ESPN's features to espn_rb.  While I do that I'll try to keep this document updated to its current functionality.  That said, I hope you enjoy.</p>
+
+<p><img src="http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png" alt="ESPN api logo" title="See more branding options at developer.espn.com/branding">
+  in mind.  ^_^</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem "espn_rb"
+</code></pre>
+
+<p>In order to use espn_rb you need to first get an API key from ESPN <a href="http://developer.espn.com/member/register">ESPN api request</a>.  Once you've gotten that squared away you can use the public requests straight away.</p>
+
+<h2>Set your API key</h2>
+
+<p>The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:</p>
+
+<div class="highlight">
+<pre> <span class="nv">$ </span><span class="nb">export </span><span class="nv">espn_api_key</span><span class="o">=</span>YOUR_SUPER_SECRET_API_KEY
+</pre>
+</div>
+
+
+<p>If you want to pass it in to your objects you may do so explicitly like so:</p>
+
+<div class="highlight">
+<pre>  <span class="n">espn</span> <span class="o">=</span> <span class="no">EspnRb</span><span class="o">.</span><span class="n">headlines</span><span class="p">(</span><span class="ss">:api_key</span> <span class="o">=&gt;</span> <span class="no">YOUR_SUPER_SECRET_API_KEY</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>For the sake of simplicity all my examples will assume that you have exported the API key as an environment variable.</p>
+
+<h2>Espn Headines</h2>
+
+<p>Instantiate the EspnRb object and check the headlines.</p>
+
+<h4>Get all headlines</h4>
+
+<div class="highlight">
+<pre><span class="nb">require</span> <span class="s1">'espn_rb'</span>
+<span class="n">espn</span> <span class="o">=</span> <span class="no">Espn</span><span class="o">.</span><span class="n">headlines</span>
+
+<span class="n">espn</span><span class="o">.</span><span class="n">all</span>
+<span class="c1">#=&gt; HeadlineResponse</span>
+</pre>
+</div>
+
+
+<p>Which will return an HeadlineResponse object.</p>
+
+<h4>Get ESPN response as a hash</h4>
+
+<p>To get the response straight from the horses' mouth:</p>
+
+<div class="highlight">
+<pre><span class="c1"># from above</span>
+
+<span class="n">espn</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">response</span>
+<span class="c1">#=&gt; ESPN's response string as a hash</span>
+</pre>
+</div>
+
+
+<p>The raw response from ESPN will give you the top ten stories meeting your criteria.</p>
+
+<h3>HeadlineResponse</h3>
+
+<p>Now includes Enumerable which allows you to treat the HeadlineResponse as an iterable object.</p>
+
+<div class="highlight">
+<pre><span class="n">espn</span> <span class="o">=</span> <span class="no">EspnRb</span><span class="o">.</span><span class="n">headlines</span>
+<span class="n">espn</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:title</span><span class="p">)</span>
+
+<span class="c1">#=&gt; ["Celtics-Clippers Preview",</span>
+<span class="c1">#    "Warriors 97, Clippers 93",</span>
+<span class="c1">#    "Hawks 106, Kings 99",</span>
+<span class="c1">#    "Warriors-Clippers, Box",</span>
+<span class="c1">#    "Warriors 97, Clippers 93",</span>
+<span class="c1">#    "Hawks 106, Kings 99",</span>
+<span class="c1">#    "Bucks-Nets Preview",</span>
+<span class="c1">#    "Hawks-Kings, Box",</span>
+<span class="c1">#    "Grizzlies 94, Nuggets 91",</span>
+<span class="c1">#    "Grizzlies-Nuggets, Box"]</span>
+
+</pre>
+</div>
+
+
+<h4>Collections</h4>
+
+<p>Since the above response is a basic collection and each headline share many common attributes there are collection methods defined on the HeadlineResponse object.  Use them like so.</p>
+
+<div class="highlight">
+<pre><span class="c1"># from above</span>
+
+<span class="c1"># Available methods are [headlines descriptions sources bylines types]</span>
+
+<span class="n">espn</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">titles</span>
+<span class="c1">#=&gt; ["array", "of", "ESPN", "titles"]</span>
+
+<span class="n">espn</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">descriptions</span>
+<span class="c1">#=&gt; ["array", "of", "ESPN", "descriptions"]</span>
+
+<span class="c1"># etc...</span>
+</pre>
+</div>
+
+
+<h4>API methods</h4>
+
+<p>When calling on the api to get new data you can pass any (soon) of the methods supported by the API.</p>
+
+<div class="highlight">
+<pre><span class="n">espn</span> <span class="o">=</span> <span class="no">EspnRb</span><span class="o">.</span><span class="n">headlines</span>
+
+<span class="n">espn</span><span class="o">.</span><span class="n">nba</span><span class="p">(</span><span class="ss">:news</span><span class="p">)</span> <span class="c1">#=&gt; HeadlineResponse</span>
+<span class="n">espn</span><span class="o">.</span><span class="n">nba</span><span class="p">(</span><span class="ss">:top</span><span class="p">)</span>  <span class="c1">#=&gt; HeadlineResponse</span>
+<span class="n">espn</span><span class="o">.</span><span class="n">nba</span><span class="p">(</span><span class="ss">:for_date</span> <span class="o">=&gt;</span> <span class="s2">"2012-03-09"</span><span class="p">)</span>  <span class="c1">#=&gt; HeadlineResponse # Will include all stories for that date</span>
+<span class="n">espn</span><span class="o">.</span><span class="n">nba</span><span class="p">(</span><span class="ss">:for_athlete</span> <span class="o">=&gt;</span> <span class="s2">"1234"</span><span class="p">)</span>     <span class="c1">#=&gt; HeadlineResponse # Will include all stories for that athleteId</span>
+
+</pre>
+</div>
+
+
+<h3>HeadlineItem</h3>
+
+<p>The HeadlineResponse Object holdes in it the headlines split into HeadlineItems.  Here is where you can get Specific information about each story.  Some of the options are:</p>
+
+<div class="highlight">
+<pre><span class="n">espn</span> <span class="o">=</span> <span class="no">EspnRb</span><span class="o">.</span><span class="n">headlines</span>
+<span class="n">headline_item</span> <span class="o">=</span> <span class="n">espn</span><span class="o">.</span><span class="n">nba</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="c1">#=&gt; HeadlineItem</span>
+
+<span class="n">headline_item</span><span class="o">.</span><span class="n">web_url</span> <span class="c1">#=&gt; "<a href="http://sports.espn.go.com/espn/wire?section=nba&amp;id=7664408&amp;ex_cid=espnapi_public">http://sports.espn.go.com/espn/wire?section=nba&amp;id=7664408&amp;ex_cid=espnapi_public</a>"</span>
+<span class="n">headline_item</span><span class="o">.</span><span class="n">id</span> <span class="c1">#=&gt; 7664408</span>
+<span class="n">headline_item</span><span class="o">.</span><span class="n">title</span> <span class="c1">#=&gt; "Mavericks-Kings Preview"</span>
+<span class="n">headline_item</span><span class="o">.</span><span class="n">athletes</span> <span class="c1">#=&gt; ["Johnny B", "Freddie Flintstone", "Etc"]</span>
+<span class="n">headline_item</span><span class="o">.</span><span class="n">leagues</span> <span class="c1">#=&gt; ["46"]</span>
+<span class="n">headline_item</span><span class="o">.</span><span class="n">athlete_ids</span> <span class="c1">#=&gt; ["123", "132", "123"]</span>
+
+<span class="c1"># More to come in future versions.</span>
+<span class="n">headline_response</span><span class="o">.</span><span class="n">headline</span> <span class="c1">#=&gt; JSON hash from original response.</span>
+</pre>
+</div>
+
+
+<p>HeadlineItem will now also respond to #images which will return an HeadlineResponse::HeadlineItem::Images class which contains the images associated with the HeadlineItem in a class that is also enumerable which lets you access the images with nice little methods like:</p>
+
+<div class="highlight">
+<pre><span class="n">espn</span> <span class="o">=</span> <span class="no">EspnRb</span><span class="o">.</span><span class="n">headlines</span>
+<span class="n">headline_item</span> <span class="o">=</span> <span class="n">espn</span><span class="o">.</span><span class="n">nfl</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+
+<span class="n">headline_item</span><span class="o">.</span><span class="n">images</span> <span class="o">=&gt;</span> <span class="no">HeadlineResponse</span><span class="o">::</span><span class="no">HeadlineItem</span><span class="o">::</span><span class="no">Images</span>
+
+<span class="c1"># or to actually use the images</span>
+
+<span class="n">images</span> <span class="o">=</span> <span class="n">headline_item</span><span class="o">.</span><span class="n">images</span>
+
+<span class="n">images</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">landscape</span> <span class="c1">#=&gt; true</span>
+<span class="n">images</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">url</span> <span class="c1">#=&gt; <a href="http://path-to-img.com/blah-blah-blah">http://path-to-img.com/blah-blah-blah</a></span>
+
+<span class="c1"># or list all the urls</span>
+
+<span class="n">images</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:url</span><span class="p">)</span> <span class="c1">#=&gt;  ["list", "of", "image", "urls"]</span>
+</pre>
+</div>
+
+
+<h4>HELP</h4>
+
+<div class="highlight">
+<pre><span class="n">espn</span> <span class="o">=</span> <span class="no">Espn</span><span class="o">.</span><span class="n">headlines</span>
+<span class="n">espn</span><span class="o">.</span><span class="n">help</span>
+<span class="c1">#=&gt; methods/descriptions below....</span>
+</pre>
+</div>
+
+
+<p>You are currently using the headlines api from here you can do the follow:</p>
+
+<pre><code>Method                    Description
+
+:all                      News across all sports/sections
+:golf                     Golf
+:boxing                   Boxing
+:mma                      Mixed Martial Arts
+:racing                   Auto Racing
+:soccer                   Professional soccer (US focus)
+:tennis                   Tennis
+:mlb                      Major League Baseball (MLB)
+:nba                      National Basketball Association (NBA)
+:nfl                      National Football League (NFL)
+:nhl                      National Hockey League (NHL)
+:nascar                   NASCAR racing
+:wnba                     Women's National Basketball Association (WNBA)
+:ncaa_basketball          NCAA Men's College Basketball
+:ncaa_football            NCAA College Football
+:ncaa_womens_basketball   NCAA Women's College Basketball
+</code></pre>
+
+<hr><p>I am actively work on this. Check the commit log to see where I'm at, and check the issues to see how you can contribute.</p>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/rondale-sc" class="avatar"><img src="https://secure.gravatar.com/avatar/e02cf84c29e144cdbdba60a4a6db68b7?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="48" height="48"/></a> <a href="https://github.com/rondale-sc">rondale-sc</a> maintains <a href="https://github.com/rondale-sc/EspnRb">Espnrb</a></p>
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/rondale-sc/EspnRb/tarball/master" class="tar">tar</a><a href="https://github.com/rondale-sc/EspnRb/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
